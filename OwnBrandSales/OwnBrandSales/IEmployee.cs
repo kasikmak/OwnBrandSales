@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OwnBrandSales
+﻿namespace OwnBrandSales
 {
     interface IEmployee
     {
@@ -20,8 +14,5 @@ namespace OwnBrandSales
         public void AddValueOfSales(string value);
 
         public Calculations GetCalculations();
-
-
-
     }
 }

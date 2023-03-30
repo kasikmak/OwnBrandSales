@@ -1,5 +1,4 @@
 using OwnBrandSales;
-using System.Xml.Schema;
 
 namespace OwnBrandSalesTest
 {
@@ -21,7 +20,6 @@ namespace OwnBrandSalesTest
             }
 
             Assert.AreEqual(87, calculations.NumberSum);
-
         }
 
         [Test]
@@ -37,7 +35,6 @@ namespace OwnBrandSalesTest
             {
                 calculations.GetValueSum(value);
             }
-
             Assert.AreEqual(350.5, calculations.ValueSum);
         }
 
@@ -56,7 +53,6 @@ namespace OwnBrandSalesTest
             var result = valuesSum / numbersSum;
 
             Assert.AreEqual(3, result);
-
         }
 
         [Test]
@@ -69,7 +65,6 @@ namespace OwnBrandSalesTest
             calc.GetResult();
 
             Assert.That(3, Is.EqualTo(3));
-
         }
     }
 }
