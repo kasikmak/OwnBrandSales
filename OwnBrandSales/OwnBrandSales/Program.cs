@@ -1,7 +1,7 @@
 ﻿using OwnBrandSales;
 
 Console.ForegroundColor = ConsoleColor.DarkCyan;
-Console.WriteLine("Hello, Welcome to application monitoring sales of the own brand products.");
+Console.WriteLine("Hello, Welcome to application monitoring the sales of their own brand products.");
 Console.WriteLine("---------------------------------------------------");
 
 bool ExitApp = false;

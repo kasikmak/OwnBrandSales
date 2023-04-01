@@ -93,18 +93,19 @@
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine();
-                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
+                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to ratio of {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
                 Console.ResetColor();
                 if (calc.Ratio >= 1.1)
                 {
                     HighRatioEvent();
                 }
-                else
-                {
-                    Console.WriteLine($"No sales recorded for {Name} {Surname}.");
-                }
-                Console.WriteLine("------------------------------------------------------------------------");
             }
+            else
+            {
+                Console.WriteLine($"No sales recorded for {Name} {Surname}.");
+            }
+            Console.WriteLine("------------------------------------------------------------------------");
         }
     }
 }
+

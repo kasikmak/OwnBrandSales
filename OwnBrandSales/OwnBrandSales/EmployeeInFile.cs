@@ -41,9 +41,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 throw new Exception("You have to write a whole number.");
-                Console.ResetColor();
             }
         }
 
@@ -122,7 +120,7 @@
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine();
-                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
+                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to ratio of {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
                 Console.ResetColor();
                 if (calc.Ratio >= 1.1)
                 {
