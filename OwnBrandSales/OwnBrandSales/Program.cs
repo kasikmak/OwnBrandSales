@@ -1,13 +1,13 @@
 ﻿using OwnBrandSales;
 
-Console.ForegroundColor = ConsoleColor.DarkCyan;
-Console.WriteLine("Hello, Welcome to application monitoring the sales of their own brand products.");
+WriteInColor(ConsoleColor.DarkCyan, "Hello, Welcome to application monitoring the sales of their own brand products.");
 Console.WriteLine("---------------------------------------------------");
 
 bool ExitApp = false;
 
 while (!ExitApp)
 {
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
     Console.WriteLine("You have following options:");
     Console.WriteLine("1 - to keep data in program memory");
     Console.WriteLine("2 - to keep data in seprate files for each employee");
@@ -29,31 +29,25 @@ while (!ExitApp)
             ExitApp = true;
             break;
         default:
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("Wrong data. You have to type 1,2 or x");
-            Console.ResetColor();
+            WriteInColor(ConsoleColor.DarkRed, "Wrong data. You have to type 1,2 or x");
             continue;
     }
 }
 
 void EmployeeHighRatio(object sender, EventArgs e)
 {
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("Impressive result! Keep going and you might qualify for a rise.");
-    Console.ResetColor();
+    WriteInColor(ConsoleColor.Green, "Impressive result! Keep going and you might qualify for a rise.");
 }
 
 void AddDataToFiles()
 {
     Console.WriteLine("Enter employee's first name");
     string name = Console.ReadLine();
-    string firstName = name.ToUpper();
     Console.WriteLine("Enter employee's surname");
     string surname = Console.ReadLine();
-    string lastName = surname.ToUpper();
     if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(surname))
     {
-        var employeeInFile = new EmployeeInFile(firstName, lastName);
+        var employeeInFile = new EmployeeInFile(name, surname);
         employeeInFile.HighRatio += EmployeeHighRatio;
         EnterNumber(employeeInFile);
         EnterValue(employeeInFile);
@@ -62,9 +56,7 @@ void AddDataToFiles()
     }
     else
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("You have to enter employee's name and surname");
-        Console.ResetColor();
+        WriteInColor(ConsoleColor.DarkRed, "You have to enter employee's name and surname");
     }
 }
 
@@ -72,13 +64,11 @@ void AddDataToMemory()
 {
     Console.WriteLine("Enter employee's first name");
     string name = Console.ReadLine();
-    string firstName = name.ToUpper();
     Console.WriteLine("Enter employee's surname");
     string surname = Console.ReadLine();
-    string lastName = surname.ToUpper();
     if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(surname))
     {
-        var employeeInMemory = new EmployeeInMemory(firstName, lastName);
+        var employeeInMemory = new EmployeeInMemory(name, surname);
         employeeInMemory.HighRatio += EmployeeHighRatio;
         EnterNumber(employeeInMemory);
         EnterValue(employeeInMemory);
@@ -87,11 +77,10 @@ void AddDataToMemory()
     }
     else
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("You have to enter employee's name and surname");
-        Console.ResetColor();
+        WriteInColor(ConsoleColor.DarkRed, "You have to enter employee's name and surname");
     }
 }
+
 void EnterNumber(IEmployee employee)
 {
     while (true)
@@ -106,9 +95,13 @@ void EnterNumber(IEmployee employee)
         {
             employee.AddNumberOfSales(input);
         }
-        catch (Exception ex)
+        catch (ArgumentException e)
         {
-            Console.WriteLine();
+            WriteInColor(ConsoleColor.DarkCyan, $"{e.Message}");
+        }
+        catch (FormatException e)
+        {
+            WriteInColor(ConsoleColor.DarkYellow, e.Message);
         }
     }
 }
@@ -127,9 +120,20 @@ void EnterValue(IEmployee employee)
         {
             employee.AddValueOfSales(input);
         }
-        catch (Exception e)
+        catch (ArgumentException e)
         {
-            Console.WriteLine($"{e.Message}");
+            WriteInColor(ConsoleColor.DarkCyan, $"{e.Message}");
         }
+        catch(FormatException e)
+        {
+            WriteInColor(ConsoleColor.DarkYellow, e.Message);
+        }
+
     }
+}
+static void WriteInColor(ConsoleColor color, string text)
+{
+    Console.ForegroundColor = color;
+    Console.WriteLine(text);
+    Console.ResetColor();
 }

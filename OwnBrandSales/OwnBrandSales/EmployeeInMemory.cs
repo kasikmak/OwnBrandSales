@@ -11,8 +11,6 @@
 
         private List<float> values = new List<float>();
 
-        public override event HighRatioDelegate HighRatio;
-
         public override void AddNumberOfSales(int number)
         {
             if (number >= 0)
@@ -21,9 +19,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Only enter if there were any sales");
-                Console.ResetColor();
+                throw new ArgumentException ("Only enter if there were any sales");
             }
         }
 
@@ -31,13 +27,11 @@
         {
             if (int.TryParse(number, out int result))
             {
-                numbers.Add(result);
+                this.AddNumberOfSales(result);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("You have to write a whole number.");
-                Console.ResetColor();
+                throw new FormatException ("You have to write a whole number.");
             }
         }
 
@@ -50,9 +44,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Only enter if there were any sales.");
-                Console.ResetColor();
+                throw new ArgumentException("Only enter if there were any sales.");
             }
         }
 
@@ -60,13 +52,11 @@
         {
             if (float.TryParse(value, out float result))
             {
-                values.Add(result);
+                this.AddValueOfSales(result);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("You have to write a number.");
-                Console.ResetColor();
+                throw new FormatException("You have to write a whole number.");
             }
         }
 
@@ -84,27 +74,6 @@
             }
             calculations.GetResult();
             return calculations;
-        }
-
-        public override void ShowCalculations()
-        {
-            var calc = GetCalculations();
-            if (calc != null)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine();
-                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to ratio of {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
-                Console.ResetColor();
-                if (calc.Ratio >= 1.1)
-                {
-                    HighRatioEvent();
-                }
-            }
-            else
-            {
-                Console.WriteLine($"No sales recorded for {Name} {Surname}.");
-            }
-            Console.WriteLine("------------------------------------------------------------------------");
         }
     }
 }

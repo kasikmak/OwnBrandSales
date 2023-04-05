@@ -14,8 +14,6 @@
             fileNameEmployeeValue = $"{firstName}_{lastName}_Value{fileName}.txt";
         }
 
-        public override event HighRatioDelegate HighRatio;
-
         public override void AddNumberOfSales(int number)
         {
             if (number >= 0)
@@ -27,9 +25,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Only enter if there were any sales.");
-                Console.ResetColor();
+                throw new ArgumentException("Only enter if there were any sales.");
             }
         }
 
@@ -41,7 +37,7 @@
             }
             else
             {
-                throw new Exception("You have to write a whole number.");
+                throw new FormatException("You have to write a whole number.");
             }
         }
 
@@ -56,9 +52,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Only enter if there were any sales.");
-                Console.ResetColor();
+                throw new ArgumentException("Only enter if there were any sales.");
             }
         }
 
@@ -70,9 +64,7 @@
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                throw new Exception("You have to write a number.");
-                Console.ResetColor();
+                throw new FormatException("You have to write a number.");
             }
         }
 
@@ -111,27 +103,6 @@
             }
             calculations.GetResult();
             return calculations;
-        }
-
-        public override void ShowCalculations()
-        {
-            var calc = GetCalculations();
-            if (calc != null)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine();
-                Console.WriteLine($"{Name} {Surname}'s result is {calc.Result:N2} which translates to ratio of {calc.Ratio}.\nTotal number of sales: {calc.NumberSum} and total value of sales: {calc.ValueSum}\n");
-                Console.ResetColor();
-                if (calc.Ratio >= 1.1)
-                {
-                    HighRatioEvent();
-                }
-            }
-            else
-            {
-                Console.WriteLine($"No sales recorded for {Name} {Surname}.");
-            }
-            Console.WriteLine("------------------------------------------------------------------------");
-        }
+        }        
     }
 }
